@@ -4,10 +4,9 @@ body {
 	font: 14px sans-serif;
 }
 h1 {
-  color: white;
 }
 p {
-  color: white;
+  color: black;
 }
 
 
@@ -23,6 +22,7 @@ p {
   text-decoration: none;
   font-size: 17px;
   text-align: center;
+  color: white;
 }
 
 .topnav a:hover {
