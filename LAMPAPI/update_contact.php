@@ -37,7 +37,7 @@
 			returnWithError("No Records Found");
 		}
 
-    $stmt->close();
+    $stmt2->close();
     $conn->close();
   }
 
