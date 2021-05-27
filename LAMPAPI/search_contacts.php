@@ -23,7 +23,7 @@
 		while($row = $result->fetch_assoc())
 		{
 			$searchCount++;
-			$searchResults [] = $row;
+			$searchResults [] = $row["FirstName"]. ' ' . $row["LastName"]. ' ' . $row["UserID"];
 		}
 		
 		if( $searchCount == 0 )
@@ -58,7 +58,7 @@
 	
 	function returnWithInfo( $searchResults )
 	{
-		$retValue = '{"results": ['.$searchResults.'] ,"error":""}';
+		$retValue = '{"results": '$searchResults' ,"error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
