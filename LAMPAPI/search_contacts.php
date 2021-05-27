@@ -15,7 +15,7 @@
 		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE FirstName LIKE '?' AND LastName LIKE '?' AND UserID=?");
 		$FirstName = "%" . $inData["searchFirst"] . "%";
 		$LastName = "%" . $inData["searchLast"] . "%";
-		$stmt->bind_param("ssi", $FirstName, $LastName, $inData["userID"]);
+		$stmt->bind_param("sss", $FirstName, $LastName, $inData["userID"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
@@ -58,7 +58,7 @@
 	
 	function returnWithInfo( $searchResults )
 	{
-		$retValue = '{"results": $searchResults ,"error":""}';
+		$retValue = '{"results": ['.$searchResults.'] ,"error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
