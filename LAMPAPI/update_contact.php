@@ -21,6 +21,18 @@
       phoneNumber = ?, address = ? WHERE ID = ?")
     $stmt->bind_param("ssssss", $firstName, $lastName, $email, $phoneNumber, $address, $ID);
     $stmt->execute();
+    $result = $stmt->get_result();
+
+    if( $row = $result->fetch_assoc() )
+		{
+			returnWithInfo( $row['ID'], $row['firstName'], $row['lastName'], $row['email'],
+       $row['phoneNumber'],  $row['address'] );
+		}
+		else
+		{
+			returnWithError("No Records Found");
+		}
+
     $stmt->close();
     $conn->close();
     returnWithError("");
@@ -42,4 +54,12 @@
     $retValue = '{"error":"' . $err . '"}';
     sendResultInfoAsJson( $retValue );
   }
+
+  function returnWithInfo( $ID, $firstName, $lastName, $email, $phoneNumber, $address )
+	{
+		$retValue = '{"id":' . $ID . ',"firstName":"' . $firstName . '","lastName":"' .
+      $lastName . '","email":"' . $email . '","phoneNumber":"' . $phoneNumber .
+      '","address":"' . $address . '","error":""}';
+		sendResultInfoAsJson( $retValue );
+	}
 ?>

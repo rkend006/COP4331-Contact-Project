@@ -17,6 +17,7 @@
     $stmt->close();
     $conn->close();
     returnWithError("");
+    echo "Contact deleted successfully.";
   }
 
   function getRequestInfo()

@@ -20,6 +20,7 @@
     $stmt->close();
     $conn->close();
     returnWithError("");
+    echo "Account created successfully.";
   }
 
   function getRequestInfo()
