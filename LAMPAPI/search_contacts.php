@@ -13,8 +13,8 @@
 	else
 	{
 		$stmt = $conn->prepare("SELECT * from Contacts where FirstName like ? and LastName like ? UserID=?");
-		$FirstName = "%" . $inData["searchFirst"] . "%";
-		$LastName = "%" . $inData["searchLast"] . "%";
+		$FirstName = "%" . $inData["FirstName"] . "%";
+		$LastName = "%" . $inData["LastName"] . "%";
 		$stmt->bind_param("ssi", $FirstName, $LastName, $inData["UserId"]);
 		$stmt->execute();
 
