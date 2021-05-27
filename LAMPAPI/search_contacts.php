@@ -2,7 +2,7 @@
 
 	$inData = getRequestInfo();
 
-	$searchResults = array();
+	$searchResults = "";
 	$searchCount = 0;
 
 	$conn = new mysqli("localhost", "Group15Admin", "ByVivec", "COP4331");
@@ -22,8 +22,12 @@
 
 		while($row = $result->fetch_assoc())
 		{
+			if( $searchCount > 0 )
+			{
+				$searchResults .= ",";
+			}
 			$searchCount++;
-			$searchResults [] = $row["FirstName"]. ' ' . $row["LastName"]. ' ' . $row["UserID"];
+			$searchResults .= '"' . $row["FirstName"]. ' ' . $row["LastName"]. ' ' . $row["UserID"] . '"';
 		}
 
 		if( $searchCount == 0 )
@@ -58,7 +62,7 @@
 
 	function returnWithInfo( $searchResults )
 	{
-		$retValue = '{"results": '$searchResults' ,"error":""}';
+		$retValue = '{"results": ['.$searchResults.'] ,"error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 
