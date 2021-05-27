@@ -9,7 +9,6 @@
   $PhoneNumber = $inData["PhoneNumber"];
   $Address = $inData["Address"];
 
-
   $conn = new mysqli("localhost", "Group15Admin", "ByVivec", "COP4331");
   if( $conn->connect_error )
   {
