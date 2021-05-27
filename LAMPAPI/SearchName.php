@@ -13,8 +13,8 @@
 	else
 	{
 		$stmt = $conn->prepare("select * from Contacts where FirstName like ? and LastName like ? UserID=?");
-		$FirstName = "%" . $inData["searchFirst"] . "%";
-		$LastName = "%" . $inData["searchLast"] . "%";
+		$FirstName = "%\"" . $inData["searchFirst"] . "%\"";
+		$LastName = "%\"" . $inData["searchLast"] . "%\"";
 		$stmt->bind_param("sss", $FirstName, $LastName, $inData["userId"]);
 		$stmt->execute();
 		
@@ -22,7 +22,6 @@
 		
 		while($row = $result->fetch_assoc())
 		{
-			
 			$searchCount++;
 			$searchResults [] = $row;
 		}
@@ -59,7 +58,7 @@
 	
 	function returnWithInfo( $searchResults )
 	{
-		$retValue = '{"results": $searchResults,"error":""}';
+		$retValue = '{"results": $searchResults ,"error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
