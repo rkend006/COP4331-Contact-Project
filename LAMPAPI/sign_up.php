@@ -18,8 +18,13 @@
     $stmt->bind_param("ssss", $FirstName, $LastName, $Login, $Password);
     $stmt->execute();
     $lastID = $conn->insert_id;
+    $stmt->close();
+    $stmt2 = $conn->prepare("SELECT * FROM Users WHERE ID = ?");
+    $stmt2->bind_param("s", $lastID);
+    $stmt2->execute();
+    $result = $stmt2->get_result();
 
-    if( $row = $insert_id->fetch_assoc() )
+    if( $row = $result->fetch_assoc() )
 		{
 			returnWithInfo( $row['ID'], $row['FirstName'], $row['LastName'], $row['Login'] );
 		}
@@ -28,7 +33,7 @@
 			returnWithError("Bad Input Syntax");
 		}
 
-    $stmt->close();
+    $stmt2->close();
     $conn->close();
   }
 

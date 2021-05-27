@@ -3,11 +3,11 @@
   $inData = getRequestInfo();
 
   $FirstName = $inData["FirstName"];
-  $lastName = $inData["LastName"];
-  $email = $inData["Email"];
-  $phoneNumber = $inData["PhoneNumber"];
-  $address = $inData["Address"];
-  $userID = $inData["UserID"];
+  $LastName = $inData["LastName"];
+  $Email = $inData["Email"];
+  $PhoneNumber = $inData["PhoneNumber"];
+  $Address = $inData["Address"];
+  $UserID = $inData["UserID"];
 
 
   $conn = new mysqli("localhost", "Group15Admin", "ByVivec", "COP4331");
@@ -21,8 +21,13 @@
     $stmt->bind_param("ssssss", $FirstName, $LastName, $Email, $PhoneNumber, $Address, $UserID);
     $stmt->execute();
     $lastID = $conn->insert_id;
+    $stmt->close();
+    $stmt2 = $conn->prepare("SELECT * FROM Contacts WHERE ID = ?");
+    $stmt2->bind_param("s", $lastID);
+    $stmt2->execute();
+    $result = $stmt2->get_result();
 
-    if( $row = $insert_id->fetch_assoc() )
+    if( $row = $result->fetch_assoc() )
 		{
 			returnWithInfo( $row['ID'], $row['FirstName'], $row['LastName'], $row['Email'],
        $row['PhoneNumber'],  $row['Address'] );
