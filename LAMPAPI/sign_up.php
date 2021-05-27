@@ -20,7 +20,7 @@
     $lastID = $conn->insert_id;
     $stmt->close();
     $stmt2 = $conn->prepare("SELECT * FROM Users WHERE ID = ?");
-    $stmt2->bind_param("s", $lastID);
+    $stmt2->bind_param("i", $lastID);
     $stmt2->execute();
     $result = $stmt2->get_result();
 

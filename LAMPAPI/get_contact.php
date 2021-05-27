@@ -17,7 +17,7 @@
   else
   {
     $stmt = $conn->prepare("SELECT * FROM Contacts WHERE ID = ?");
-    $stmt->bind_param("s", $ID);
+    $stmt->bind_param("i", $ID);
     $stmt->execute();
     $result = $stmt->get_result();
 
