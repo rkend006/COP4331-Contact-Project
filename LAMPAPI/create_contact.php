@@ -23,6 +23,7 @@
     $stmt->close();
     $conn->close();
     returnWithError("");
+    echo "Contact created successfully.";
   }
 
   function getRequestInfo()
