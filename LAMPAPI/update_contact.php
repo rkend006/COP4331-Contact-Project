@@ -21,7 +21,11 @@
       PhoneNumber = ?, Address = ? WHERE ID = ?")
     $stmt->bind_param("ssssss", $FirstName, $LastName, $Email, $PhoneNumber, $Address, $ID);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt->close();
+    $stmt2 = $conn->prepare("SELECT * FROM Contacts WHERE ID = ?")
+    $stmt2->bind_param("s", $ID);
+    $stmt2->execute();
+    $result = $stmt2->get_result();
 
     if( $row = $result->fetch_assoc() )
 		{
