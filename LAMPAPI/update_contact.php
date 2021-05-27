@@ -3,12 +3,11 @@
   $inData = getRequestInfo();
 
   $ID = $inData["ID"];
-  $firstName = $inData["firstName"];
-  $lastName = $inData["lastName"];
-  $email = $inData["email"];
-  $phoneNumber = $inData["phoneNumber"];
-  $address = $inData["address"];
-
+  $FirstName = $inData["FirstName"];
+  $LastName = $inData["LastName"];
+  $Email = $inData["Email"];
+  $PhoneNumber = $inData["PhoneNumber"];
+  $Address = $inData["Address"];
 
   $conn = new mysqli("localhost", "Group15Admin", "ByVivec", "COP4331");
   if( $conn->connect_error )
@@ -17,25 +16,28 @@
   }
   else
   {
-    $stmt = $conn->prepare("UPDATE Contacts SET firstName = ?, lastName = ?, email = ?,
-      phoneNumber = ?, address = ? WHERE ID = ?")
-    $stmt->bind_param("ssssss", $firstName, $lastName, $email, $phoneNumber, $address, $ID);
+    $stmt = $conn->prepare("UPDATE Contacts SET FirstName = ?, LastName = ?, Email = ?,
+      PhoneNumber = ?, Address = ? WHERE ID = ?")
+    $stmt->bind_param("sssssi", $FirstName, $LastName, $Email, $PhoneNumber, $Address, $ID);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt->close();
+    $stmt2 = $conn->prepare("SELECT * FROM Contacts WHERE ID = ?")
+    $stmt2->bind_param("i", $ID);
+    $stmt2->execute();
+    $result = $stmt2->get_result();
 
     if( $row = $result->fetch_assoc() )
 		{
-			returnWithInfo( $row['ID'], $row['firstName'], $row['lastName'], $row['email'],
-       $row['phoneNumber'],  $row['address'] );
+			returnWithInfo( $row['ID'], $row['FirstName'], $row['LastName'], $row['Email'],
+       $row['PhoneNumber'],  $row['Address'] );
 		}
 		else
 		{
 			returnWithError("No Records Found");
 		}
 
-    $stmt->close();
+    $stmt2->close();
     $conn->close();
-    returnWithError("");
   }
 
   function getRequestInfo()
@@ -55,11 +57,9 @@
     sendResultInfoAsJson( $retValue );
   }
 
-  function returnWithInfo( $ID, $firstName, $lastName, $email, $phoneNumber, $address )
+  function returnWithInfo( $ID, $FirstName, $LastName, $Email, $PhoneNumber, $Address )
 	{
-		$retValue = '{"id":' . $ID . ',"firstName":"' . $firstName . '","lastName":"' .
-      $lastName . '","email":"' . $email . '","phoneNumber":"' . $phoneNumber .
-      '","address":"' . $address . '","error":""}';
+		$retValue = '{"id":' . $ID . ',"FirstName":"' . $FirstName . '","LastName":"' . $LastName . '","Email":"' . $Email . '","PhoneNumber":"' . $PhoneNumber . '","Address":"' . $Address . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 ?>

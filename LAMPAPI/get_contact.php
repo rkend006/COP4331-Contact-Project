@@ -3,11 +3,11 @@
   $inData = getRequestInfo();
 
   $ID = $inData["ID"];
-  $firstName = "";
-  $lastName = "";
-  $email = "";
-  $phoneNumber = "";
-  $address = "";
+  $FirstName = "";
+  $LastName = "";
+  $Email = "";
+  $PhoneNumber = "";
+  $Address = "";
 
   $conn = new mysqli("localhost", "Group15Admin", "ByVivec", "COP4331");
   if( $conn->connect_error )
@@ -17,14 +17,14 @@
   else
   {
     $stmt = $conn->prepare("SELECT * FROM Contacts WHERE ID = ?");
-    $stmt->bind_param("s", $ID);
+    $stmt->bind_param("i", $ID);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if( $row = $result->fetch_assoc() )
 		{
-			returnWithInfo( $row['ID'], $row['firstName'], $row['lastName'], $row['email'],
-       $row['phoneNumber'],  $row['address'] );
+			returnWithInfo( $row['ID'], $row['FirstName'], $row['LastName'], $row['Email'],
+       $row['PhoneNumber'],  $row['Address'] );
 		}
 		else
 		{
@@ -52,11 +52,11 @@
     sendResultInfoAsJson( $retValue );
   }
 
-  function returnWithInfo( $ID, $firstName, $lastName, $email, $phoneNumber, $address )
+  function returnWithInfo( $ID, $FirstName, $LastName, $Email, $PhoneNumber, $Address )
 	{
-		$retValue = '{"id":' . $ID . ',"firstName":"' . $firstName . '","lastName":"' .
-      $lastName . '","email":"' . $email . '","phoneNumber":"' . $phoneNumber .
-      '","address":"' . $address . '","error":""}';
+		$retValue = '{"ID":' . $ID . ',"FirstName":"' . $FirstName . '","LastName":"' .
+      $LastName . '","Email":"' . $Email . '","PhoneNumber":"' . $PhoneNumber .
+      '","Address":"' . $Address . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 ?>

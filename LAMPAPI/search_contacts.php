@@ -1,15 +1,15 @@
 <?php
 
 	$inData = getRequestInfo();
-	
+
 	$searchResults = array();
 	$searchCount = 0;
 
 	$conn = new mysqli("localhost", "Group15Admin", "ByVivec", "COP4331");
-	if ($conn->connect_error) 
+	if ($conn->connect_error)
 	{
 		returnWithError( $conn->connect_error );
-	} 
+	}
 	else
 	{
 		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE FirstName LIKE '?' AND LastName LIKE '?' AND UserID=?");
@@ -17,15 +17,15 @@
 		$LastName = "%" . $inData["searchLast"] . "%";
 		$stmt->bind_param("sss", $FirstName, $LastName, $inData["userID"]);
 		$stmt->execute();
-		
+
 		$result = $stmt->get_result();
-		
+
 		while($row = $result->fetch_assoc())
 		{
 			$searchCount++;
 			$searchResults [] = $row["FirstName"]. ' ' . $row["LastName"]. ' ' . $row["UserID"];
 		}
-		
+
 		if( $searchCount == 0 )
 		{
 			returnWithError( "No Records Found" );
@@ -34,7 +34,7 @@
 		{
 			returnWithInfo( $searchResults );
 		}
-		
+
 		$stmt->close();
 		$conn->close();
 	}
@@ -49,17 +49,17 @@
 		header('Content-type: application/json');
 		echo $obj;
 	}
-	
+
 	function returnWithError( $err )
 	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+		$retValue = '{"ID":0,"FirstName":"","LastName":"","error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
-	
+
 	function returnWithInfo( $searchResults )
 	{
 		$retValue = '{"results": '$searchResults' ,"error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
-	
+
 ?>
