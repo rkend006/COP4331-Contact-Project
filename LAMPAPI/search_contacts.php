@@ -12,32 +12,37 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE FirstName LIKE '?' AND LastName LIKE '?' AND UserID=?");
+		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE FirstName LIKE '?'  AND LastName LIKE  '?'  AND UserID= ? ");
 		$FirstName = "%" . $inData["searchFirst"] . "%";
 		$LastName = "%" . $inData["searchLast"] . "%";
 		$stmt->bind_param("ssi", $FirstName, $LastName, $inData["userID"]);
 		$stmt->execute();
 
-		$result = $stmt->get_result();
-
-		while($row = $result->fetch_assoc())
+		if($result = $stmt->get_result())
 		{
-			if( $searchCount > 0 )
+			while($row = $result->fetch_assoc())
 			{
-				$searchResults .= ",";
+				if( $searchCount > 0 )
+				{
+					$searchResults .= ",";
+				}
+				$searchCount++;
+				$searchResults .= '"' . $row["FirstName"]. ' ' . $row["LastName"]. ' ' . $row["ID"] . '"';
 			}
-			$searchCount++;
-			$searchResults .= '"' . $row["FirstName"]. ' ' . $row["LastName"]. ' ' . $row["UserID"] . '"';
+
+			if( $searchCount == 0 )
+			{
+				returnWithError( "No Records Found" );
+			}
+			else
+			{
+				returnWithInfo( $searchResults );
+			}
 		}
 
-		if( $searchCount == 0 )
-		{
-			returnWithError( "No Records Found" );
-		}
-		else
-		{
-			returnWithInfo( $searchResults );
-		}
+		else returnWithError( $stmt->error );
+
+		
 
 		$stmt->close();
 		$conn->close();
