@@ -32,7 +32,8 @@
 
 			if( $searchCount == 0 )
 			{
-				returnWithError( "No Records Found" );
+				$debugger = $FirstName . $LastName . $inData["userID"];
+				returnWithError( $debugger);
 			}
 			else
 			{
