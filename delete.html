@@ -1,0 +1,43 @@
+<!Registration form>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!This makes the typed characters machine readable>
+    <meta charset="UTF-8">
+	
+    <title>Delete</title>
+	
+    <link rel="stylesheet" href="">
+    <style>
+        .wrapper{ width: 350px; padding: 20px; }
+    </style>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div id='topnavid' class='topnav'>
+            <a href='/'><h1 style='display: inline;'>Homepage</h1></a><a href='/Stuff.html'>NA</a><a href='/delete.html'>Delete</a>
+    </div>
+    <div class="wrapper" style="padding:1px; background-color: Lavender; width:1000px;">
+        <h2>Delete User:</h2>
+        <form action="/LAMPAPI/delete.php" method="post">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="delete" class="form-control" value="">
+            </div>    
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Delete">
+            </div>
+            <p><a href="/homepage.html">Return</a></p>
+        </form>
+    </div>
+	
+</body>
+
+</html>
