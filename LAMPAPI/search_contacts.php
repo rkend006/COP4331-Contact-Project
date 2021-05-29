@@ -21,6 +21,8 @@
 		if($result = $stmt->execute())
 		{
 			$result = $stmt->get_result();
+
+			echo $result;
 			
 			while($row = $result->fetch_assoc())
 			{
