@@ -2,7 +2,7 @@
 
 	$inData = getRequestInfo();
 
-	$searchResults = "";
+	$searchResults = [];
 	$searchCount = 0;
 
 	$conn = new mysqli("localhost", "Group15Admin", "ByVivec", "COP4331");
@@ -19,18 +19,15 @@
 	//$result should get the result set 
 	if ($result = $stmt->get_result()) {
 		while ($row = $result->fetch_array()) {
-			if ($searchCount > 0) {
-				$searchResults .= ",";
-			}
 			$searchCount++;
-			$searchResults .= '"' . implode(",", $row) . '"';
+			array_push($searchResults, $row);
 		}
 
 		//incase of empty result set, return no results, otherwise return data
 		if ($searchCount == 0) {
 			returnWithError("No results found.");
 		} else {
-			returnWithInfo($searchResults);
+			returnWithInfo(json_encode($searchResults));
 		}
 	} else returnWithError("Debug: Empty result set");
 
