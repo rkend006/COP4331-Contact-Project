@@ -18,7 +18,7 @@
 
 	//$result should get the result set 
 	if ($result = $stmt->get_result()) {
-		while ($row = $result->fetch_array()) {
+		while ($row = $result->fetch_assoc()) {
 			$searchCount++;
 			array_push($searchResults, $row);
 		}
@@ -56,7 +56,7 @@
 
 	function returnWithInfo($searchResults)
 	{
-		$retValue = '{"results": [' . $searchResults . '] ,"error":""}';
+		$retValue = '{"results": ' . $searchResults . ' ,"error":""}';
 		sendResultInfoAsJson($retValue);
 	}
 ?>
