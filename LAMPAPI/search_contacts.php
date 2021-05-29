@@ -11,24 +11,14 @@
 	}
 
 	$stmt = $conn->prepare("SELECT * FROM Contacts WHERE (FirstName LIKE ?) AND (LastName LIKE ?) AND (UserID = ?) ");
-	$FirstName = "'%" . $inData["searchFirst"] . "%'";
-	$LastName = "'%" . $inData["searchLast"] . "%'";
+	$FirstName = "%" . $inData["searchFirst"] . "%";
+	$LastName = "%" . $inData["searchLast"] . "%";
 	$stmt->bind_param("ssi", $FirstName, $LastName, $inData["userID"]);
 	$stmt->execute();
 
-	var_dump($FirstName);
-	var_dump($LastName);
-	var_dump($inData);
-
 	//$result should get the result set 
 	if ($result = $stmt->get_result()) {
-		echo "Got a result";
-		var_dump($stmt);
-		var_dump($result);
 		while ($row = $result->fetch_array()) {
-			echo "Got row: ";
-			var_dump($row);
-
 			if ($searchCount > 0) {
 				$searchResults .= ",";
 			}
