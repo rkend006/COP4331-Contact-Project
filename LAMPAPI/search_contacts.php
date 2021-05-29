@@ -21,7 +21,9 @@
 		if($stmt->execute())
 		{
 			//$result should get the result set 
-			$result = $stmt->get_result();
+			if($result = $stmt->get_result())
+			{}
+			else returnWithError("Debug: Empty result set");
 			
 			//in each iteraion of the loop, $row should get the next available row
 			while($row = $result->fetch_array())
