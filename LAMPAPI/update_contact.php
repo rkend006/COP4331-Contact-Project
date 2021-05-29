@@ -17,7 +17,7 @@
   else
   {
     $stmt = $conn->prepare("UPDATE Contacts SET FirstName = ?, LastName = ?, Email = ?,
-      PhoneNumber = ?, Address = ? WHERE ID = ?")
+      PhoneNumber = ?, Address = ? WHERE ID = ?");
     $stmt->bind_param("sssssi", $FirstName, $LastName, $Email, $PhoneNumber, $Address, $ID);
     $stmt->execute();
     $stmt->close();
@@ -59,7 +59,7 @@
 
   function returnWithInfo( $ID, $FirstName, $LastName, $Email, $PhoneNumber, $Address )
 	{
-		$retValue = '{"id":' . $ID . ',"FirstName":"' . $FirstName . '","LastName":"' . $LastName . '","Email":"' . $Email . '","PhoneNumber":"' . $PhoneNumber . '","Address":"' . $Address . '","error":""}';
+		$retValue = '{"ID":' . $ID . ',"FirstName":"' . $FirstName . '","LastName":"' . $LastName . '","Email":"' . $Email . '","PhoneNumber":"' . $PhoneNumber . '","Address":"' . $Address . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 ?>
