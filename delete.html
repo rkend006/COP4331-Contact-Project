@@ -1,9 +1,15 @@
-<!Registration form>
+<!Delete page>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+
+    <style>
+        body {
+          background-image: url('bg1.jpg');
+        }
+    </style>
+
 	<!This makes the typed characters machine readable>
     <meta charset="UTF-8">
 	
@@ -14,13 +20,14 @@
         .wrapper{ width: 350px; padding: 20px; }
     </style>
     <link rel="stylesheet" href="/css/styles.css">
-</head>
 
+</head>
 <body>
+
     <div id='topnavid' class='topnav'>
             <a href='/'><h1 style='display: inline;'>Homepage</h1></a><a href='/Stuff.html'>NA</a><a href='/login.html'>Login</a>
     </div>
-    <div class="wrapper" style="padding:1px; background-color: Lavender; width:1000px;">
+    <div class="wrapper" style="padding:1px; background-color: Lavender; width:100%;">
         <h2>Delete User:</h2>
         <form action="/LAMPAPI/delete.php" method="post">
             <div class="form-group">
@@ -37,6 +44,7 @@
             <p><a href="/homepage.html">Return</a></p>
         </form>
     </div>
+
 	
 </body>
 

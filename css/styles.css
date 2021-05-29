@@ -2,6 +2,7 @@ body {
 	background-color: gray;
 	padding: 2px;
 	font: 14px sans-serif;
+
 }
 h1 {
 }
@@ -13,7 +14,7 @@ p {
 .topnav {
   background-color: #223;
   overflow: hidden;
-  width: 1000px;
+  width: 100%;
 }
 
 .topnav a {
