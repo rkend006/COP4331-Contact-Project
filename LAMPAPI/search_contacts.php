@@ -16,11 +16,12 @@
 		$FirstName = "'%" . $inData["searchFirst"] . "%'";
 		$LastName = "'%" . $inData["searchLast"] . "%'";
 		$stmt->bind_param("ssi", $FirstName, $LastName, $inData["userID"]);
-		$stmt->execute();
+		//$stmt->execute();
 
 		if($result = $stmt->execute())
 		{
 			$result = $stmt->get_result();
+			
 			while($row = $result->fetch_assoc())
 			{
 				if( $searchCount > 0 )
