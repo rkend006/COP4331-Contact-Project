@@ -24,14 +24,14 @@
 			$result = $stmt->get_result();
 			
 			//in each iteraion of the loop, $row should get the next available row
-			while($row = $result->fetch_assoc())
+			while($row = $result->fetch_array())
 			{
 				if( $searchCount > 0 )
 				{
 					$searchResults .= ",";
 				}
 				$searchCount++;
-				$searchResults .= '"' . $row["FirstName"]. ' ' . $row["LastName"]. ' ' . $row["ID"] . '"';
+				$searchResults .= '"' . implode(",",$row) . '"';
 			}
 
 			//incase of empty result set, return no results, otherwise return data
