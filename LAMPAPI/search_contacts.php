@@ -16,14 +16,14 @@
 		$FirstName = "'%" . $inData["searchFirst"] . "%'";
 		$LastName = "'%" . $inData["searchLast"] . "%'";
 		$stmt->bind_param("ssi", $FirstName, $LastName, $inData["userID"]);
-		//$stmt->execute();
 
-		if($result = $stmt->execute())
+		//statement executes, returns either T or F
+		if($stmt->execute())
 		{
+			//$result should get the result set 
 			$result = $stmt->get_result();
-
-			echo $result;
 			
+			//in each iteraion of the loop, $row should get the next available row
 			while($row = $result->fetch_assoc())
 			{
 				if( $searchCount > 0 )
@@ -34,10 +34,10 @@
 				$searchResults .= '"' . $row["FirstName"]. ' ' . $row["LastName"]. ' ' . $row["ID"] . '"';
 			}
 
+			//incase of empty result set, return no results, otherwise return data
 			if( $searchCount == 0 )
 			{
-				$debugger = $FirstName . $LastName . $inData["userID"];
-				returnWithError( $debugger);
+				returnWithError( "No results found.");
 			}
 			else
 			{
