@@ -12,14 +12,14 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("SELECT '*' FROM Contacts WHERE FirstName LIKE ? AND LastName LIKE ? AND UserID = ? ;");	
+		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE FirstName LIKE ? AND LastName LIKE ? AND UserID = ?");	
 		$FirstName = "'%" . $inData["searchFirst"] . "%'";
 		$LastName = "'%" . $inData["searchLast"] . "%'";
 		$stmt->bind_param("ssi", $FirstName, $LastName, $inData["userID"]);
 
 		//statement executes, returns either T or F
-		if($stmt->execute())
-		{
+		//put If statement back here if necessary
+		$stmt->execute();
 			//$result should get the result set 
 			$result = $stmt->get_result();
 			
@@ -43,9 +43,9 @@
 			{
 				returnWithInfo( $searchResults );
 			}
-		}
-
-		else returnWithError( $stmt->error );
+		
+		//else statement here returning $stmt->error
+		
 
 		
 
