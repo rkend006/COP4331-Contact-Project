@@ -21,7 +21,7 @@
     $stmt->bind_param("sssssi", $FirstName, $LastName, $Email, $PhoneNumber, $Address, $ID);
     $stmt->execute();
     $stmt->close();
-    $stmt2 = $conn->prepare("SELECT * FROM Contacts WHERE ID = ?")
+    $stmt2 = $conn->prepare("SELECT * FROM Contacts WHERE ID = ?");
     $stmt2->bind_param("i", $ID);
     $stmt2->execute();
     $result = $stmt2->get_result();
