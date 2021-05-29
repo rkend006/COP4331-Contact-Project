@@ -19,6 +19,7 @@
 	//$result should get the result set 
 	if ($result = $stmt->get_result()) {
 		echo "Got result";
+		var_dump($result);
 		while ($row = $result->fetch_array()) {
 			echo "Got row: ";
 			var_dump($row);
