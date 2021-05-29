@@ -18,7 +18,7 @@
 		$stmt->bind_param("ssi", $FirstName, $LastName, $inData["userID"]);
 		$stmt->execute();
 
-		if($result = $stmt->execute())
+		if($result = $stmt->fetch())
 		{
 			$result = $stmt->get_result();
 			while($row = $result->fetch_assoc())
