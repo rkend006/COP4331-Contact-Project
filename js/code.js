@@ -112,7 +112,7 @@ function saveCookie()
 	date.setTime(date.getTime()+(minutes*60*1000));	
 	
 	payload = encodeURIComponent(JSON.stringify(userData));
-	document.cookie = "userData=" + userData + ";expires=" + date.toGMTString();;
+	document.cookie = "userData=" + payload + ";expires=" + date.toGMTString();;
 }
 
 function readCookie()
