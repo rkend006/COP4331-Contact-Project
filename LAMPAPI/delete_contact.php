@@ -11,13 +11,25 @@
   }
   else
   {
-    $stmt = $conn->prepare("DELETE FROM Contacts WHERE ID = ?");
-    $stmt->bind_param("i", $ID);
-    $stmt->execute();
-    $stmt->close();
-    $conn->close();
-    returnWithError("");
-    echo "\nContact deleted successfully.";
+    $stmt1 = $conn->prepare("SELECT * FROM Contacts WHERE ID = ?");
+    $stmt1->bind_param("i", $ID);
+    $stmt1->execute();
+    $result = $stmt1->get_result();
+    $stmt1->close();
+    if( $row = $result->fetch_assoc() )
+		{
+      $stmt2 = $conn->prepare("DELETE FROM Contacts WHERE ID = ?");
+      $stmt2->bind_param("i", $ID);
+      $stmt2->execute();
+      $stmt2->close();
+      $conn->close();
+      returnWithError("");
+      echo "\nContact deleted successfully.";
+		}
+		else
+		{
+			returnWithError("No Records Found");
+		}
   }
 
   function getRequestInfo()
