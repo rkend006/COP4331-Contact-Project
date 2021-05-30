@@ -139,7 +139,7 @@ function readCookie()
 		return;
 	}
 
-	userData = JSON.parse(cookieData);
+	userData = JSON.parse(decodeURIComponent(cookieData));
 	//document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
 }
 
