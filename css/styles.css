@@ -1,18 +1,33 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
 
 html, body {
-  height: 100%;
-  width: 100%;
   font-family: 'poppins', sans-serif;
-  color: #222;
-
+  font: 14px sans-serif;
+  color: rgb(201, 201, 201);
 }
 
+body {
+  height: 100%;
+  width: 100%;
+  background-color: gray;
+  padding: 2px;
+  background-image: url("/images/bg1.jpg");
+}
+
+p {
+  color: black;
+}
+
+label{
+  width:70px;
+  display: inline-block;
+
+}
 
 .topnav {
   background-color: #223;
   overflow: hidden;
-  width: 1000px;
+  width: 100%;
 }
 
 .topnav a {
@@ -42,4 +57,11 @@ html, body {
 
 .nav-link {
   font-size:1.1em !important;
+}
+
+.container {
+  margin-top: 10px;
+  background-color: rgba(16, 16, 16, 0.7);
+  border-radius: 10px;
+  height: 100%;
 }
