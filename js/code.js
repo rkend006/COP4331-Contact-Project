@@ -1,4 +1,4 @@
-var urlBase = 'http://contacts.tallens.codes';
+var urlBase = 'http://contacts.tallens.codes/LAMPAPI';
 var extension = 'php';
 
 var userId = 0;
